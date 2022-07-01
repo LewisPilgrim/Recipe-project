@@ -1,0 +1,8 @@
+.listIngredients {
+    background-color: blue;
+}
+
+.ingredient-item {
+    padding-left: 1rem;
+    color: lightgrey;
+}

@@ -1,0 +1,10 @@
+.Recipe {
+    background-color: #31302d;
+    padding: 3rem;
+    display: inline-block;
+    width: 35%;
+}
+
+.Recipe-form {
+    margin-top: 3rem;
+}

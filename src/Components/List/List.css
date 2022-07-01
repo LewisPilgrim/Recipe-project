@@ -1,0 +1,7 @@
+.List {
+    height: 20rem;
+    width: 35%;
+    display: inline-block;
+    background-color: #31302d;
+    padding: 2rem;
+}
