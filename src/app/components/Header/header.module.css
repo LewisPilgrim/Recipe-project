@@ -1,8 +1,8 @@
-
 .header {
     display: flex;
     justify-content: space-between;
     width: 100%;
     background-color: lightsteelblue;
     color: darkblue;
+    padding: 5px;
 }

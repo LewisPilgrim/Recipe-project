@@ -1,9 +1,13 @@
 import React from 'react'
+import styles from "./recipeList.module.css"
 
 const RecipeList = () => {
   return (
-    <div>
-      Recipe List
+    <div className={styles.list}>
+      <h2>Recipe List</h2>
+      <div className="container">
+
+      </div>
     </div>
   )
 }
