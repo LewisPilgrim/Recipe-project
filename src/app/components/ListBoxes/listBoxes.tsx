@@ -1,3 +1,4 @@
+'use client'
 import styles from "./listBoxes.module.css"
 import RecipeList from "./RecipeList/RecipeList"
 import ShoppingList from "./ShoppingList/ShoppingList"
