@@ -1,0 +1,9 @@
+.ingredient-listing {
+    display: flex;
+    justify-content: space-between;
+}
+
+.listbox {
+    padding: 5px;
+    
+}

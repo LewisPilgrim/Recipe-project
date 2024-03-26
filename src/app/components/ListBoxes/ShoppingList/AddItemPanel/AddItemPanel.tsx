@@ -1,40 +1,47 @@
 import React, { useEffect, useState } from "react"
+import styles from "./AddItemPanel.module.css"
+
+type ingredient = {
+  name: string
+  amount: string
+}
 
 const AddItemPanel = () => {
-    const [itemName, setItemName] = useState("Name")
-    const [itemAmount, setItemAmount] = useState(0)
-    const [itemAmountUnits, setItemAmountUnits] = useState("g")
-    const [ingredientList, setIngredientList] = useState<object[]>([])
+  const [itemName, setItemName] = useState("Name")
+  const [itemAmount, setItemAmount] = useState(0)
+  const [itemAmountUnits, setItemAmountUnits] = useState("g")
+  const [ingredientList, setIngredientList] = useState<ingredient[] | []>([])
 
-    const handleInput = (e: React.ChangeEvent<HTMLInputElement>): void => {
-        if (e.target.id === "item-name") {
-            setItemName(e.target.value)
-        } else if (e.target.id === "item-amount") {
-            setItemAmount(Number(e.target.value))
-        }
+  const handleInput = (e: React.ChangeEvent<HTMLInputElement>): void => {
+    if (e.target.id === "item-name") {
+      setItemName(e.target.value)
+    } else if (e.target.id === "item-amount") {
+      setItemAmount(Number(e.target.value))
     }
+  }
 
-    const handleSelect = (e: React.ChangeEvent<HTMLSelectElement>): void => {
-        setItemAmountUnits(e.target.value)
+  const handleSelect = (e: React.ChangeEvent<HTMLSelectElement>): void => {
+    setItemAmountUnits(e.target.value)
+  }
+
+  const handleSubmit = (e: React.ChangeEvent<HTMLFormElement>) => {
+    e.preventDefault()
+    setIngredientList([
+      ...ingredientList,
+      {
+        name: itemName,
+        amount: itemAmount + itemAmountUnits,
+      },
+    ])
+  }
+
+  useEffect(() => {
+    const createdItem = {
+      name: itemName,
+      amount: itemAmount + itemAmountUnits,
     }
-
-    const handleSubmit = () => {
-        setIngredientList([
-            ...ingredientList,
-            {
-                name: itemName,
-                amount: itemAmount + itemAmountUnits
-            }
-        ])
-    }
-
-    useEffect(() => {
-        const createdItem = {
-            name: itemName,
-            amount: itemAmount + itemAmountUnits
-        }
-        console.log(createdItem)
-    })
+    console.log(createdItem)
+  })
 
   return (
     <div>
@@ -43,11 +50,19 @@ const AddItemPanel = () => {
         <ul>
           <li>
             <label id='item-name'>Item Name</label>
-            <input value={itemName} id='item-name' onChange={handleInput}></input>
+            <input
+              value={itemName}
+              id='item-name'
+              onChange={handleInput}
+            ></input>
           </li>
           <li>
             <label id='item-amount'>Amount</label>
-            <input value={itemAmount} id='item-amount' onChange={handleInput}></input>
+            <input
+              value={itemAmount}
+              id='item-amount'
+              onChange={handleInput}
+            ></input>
           </li>
           <li>
             <select onChange={handleSelect}>
@@ -58,6 +73,19 @@ const AddItemPanel = () => {
         </ul>
         <button type='submit'>Add</button>
       </form>
+      <div className={`container ${styles.listbox}`}>
+        {ingredientList.length > 0
+          ? ingredientList.map((ingredient: ingredient) => {
+              return (
+                <li key={ingredient.name} className={styles["ingredient-listing"]}>
+                  <span>{ingredient.name}</span>
+                  <span>{ingredient.amount}</span>
+                    
+                </li>
+              )
+            })
+          : ""}
+      </div>
     </div>
   )
 }
