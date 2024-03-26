@@ -1,8 +1,11 @@
 import { configureStore } from "@reduxjs/toolkit"
+import shoppingListReducer from "./features/shoppingList/shoppingListSlice"
 
 export const makeStore = () => {
     return configureStore({
-        reducer: {}
+        reducer: {
+            shoppingList: shoppingListReducer
+        }
     })
 }
 

@@ -2,3 +2,7 @@
     padding: 20px;  
   }
 
+  .ingredient-listing {
+    display: flex;
+    justify-content: space-between;
+}

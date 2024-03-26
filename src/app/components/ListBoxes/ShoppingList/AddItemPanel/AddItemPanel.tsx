@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from "react"
 import styles from "./AddItemPanel.module.css"
+import { useAppDispatch } from "@/lib/hooks"
+import { addItem } from "@/lib/features/shoppingList/shoppingListSlice"
 
 type ingredient = {
   name: string
@@ -11,6 +13,7 @@ const AddItemPanel = () => {
   const [itemAmount, setItemAmount] = useState(0)
   const [itemAmountUnits, setItemAmountUnits] = useState("g")
   const [ingredientList, setIngredientList] = useState<ingredient[] | []>([])
+  const dispatch = useAppDispatch()
 
   const handleInput = (e: React.ChangeEvent<HTMLInputElement>): void => {
     if (e.target.id === "item-name") {
@@ -26,13 +29,7 @@ const AddItemPanel = () => {
 
   const handleSubmit = (e: React.ChangeEvent<HTMLFormElement>) => {
     e.preventDefault()
-    setIngredientList([
-      ...ingredientList,
-      {
-        name: itemName,
-        amount: itemAmount + itemAmountUnits,
-      },
-    ])
+    dispatch(addItem({ name: itemName, weight: itemAmount, units: itemAmountUnits }))
   }
 
   useEffect(() => {
@@ -73,19 +70,6 @@ const AddItemPanel = () => {
         </ul>
         <button type='submit'>Add</button>
       </form>
-      <div className={`container ${styles.listbox}`}>
-        {ingredientList.length > 0
-          ? ingredientList.map((ingredient: ingredient) => {
-              return (
-                <li key={ingredient.name} className={styles["ingredient-listing"]}>
-                  <span>{ingredient.name}</span>
-                  <span>{ingredient.amount}</span>
-                    
-                </li>
-              )
-            })
-          : ""}
-      </div>
     </div>
   )
 }
